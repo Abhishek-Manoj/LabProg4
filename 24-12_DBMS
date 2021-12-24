@@ -1,0 +1,201 @@
+mysql> CREATE DATABASE COLLEGE_5CS1_B1;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE COLLEGE_5CS1_B1;
+Database changed
+
+mysql> CREATE TABLE STUDENT(USN VARCHAR(15) PRIMARY KEY,SNAME VARCHAR(20) NOT NULL, ADDRESS VARCHAR(20), PHONE BIGINT, GENDER CHAR NOT NULL);
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> CREATE TABLE SEMSEC(SSID INT PRIMARY KEY,SEM INT NOT NULL, SEC VARCHAR(10) NOT NULL);
+Query OK, 0 rows affected (0.13 sec)
+
+0
+mysql> CREATE TABLE COURSE(SUBCODE VARCHAR(15) PRIMARY KEY,TITLE CHAR NOT NULL,SEM INT NOT NULL,CREDITS INT NOT NULL);
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> CREATE TABLE IAMARKS(USN VARCHAR(15),SUBCODE VARCHAR(15),SSID INT,TEST1 INT NOT NULL,TEST2 INT NOT NULL,TEST3 INT NOT NULL,FINALIA INT,PRIMARY KEY(USN,SUBCODE,SSID),FOREIGN KEY(USN) REFERENCES STUDENT(USN) ON UPDATE CASCADE ON DELETE CASCADE,FOREIGN KEY(SUBCODE) REFERENCES COURSE(SUBCODE) ON UPDATE CASCADE ON DELETE CASCADE, FOREIGN KEY(SSID) REFERENCES SEMSEC(SSID) ON DELETE CASCADE ON UPDATE CASCADE);
+Query OK, 0 rows affected (0.30 sec)
+
+mysql> DESC STUDENT;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| USN     | varchar(15) | NO   | PRI | NULL    |       |
+| SNAME   | varchar(20) | NO   |     | NULL    |       |
+| ADDRESS | varchar(20) | YES  |     | NULL    |       |
+| PHONE   | bigint(20)  | YES  |     | NULL    |       |
+| GENDER  | char(1)     | NO   |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> DESC SEMSEC;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| SSID  | int(11)     | NO   | PRI | NULL    |       |
+| SEM   | int(11)     | NO   |     | NULL    |       |
+| SEC   | varchar(10) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> DESC CLASS;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| USN   | varchar(15) | NO   | PRI | NULL    |       |
+| SSID  | int(11)     | NO   | MUL | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> DESC COURSE;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| SUBCODE | varchar(15) | NO   | PRI | NULL    |       |
+| TITLE   | char(1)     | NO   |     | NULL    |       |
+| SEM     | int(11)     | NO   |     | NULL    |       |
+| CREDITS | int(11)     | NO   |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> DESC IAMARKS;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| USN     | varchar(15) | NO   | PRI | NULL    |       |
+| SUBCODE | varchar(15) | NO   | PRI | NULL    |       |
+| SSID    | int(11)     | NO   | PRI | NULL    |       |
+| TEST1   | int(11)     | NO   |     | NULL    |       |
+| TEST2   | int(11)     | NO   |     | NULL    |       |
+| TEST3   | int(11)     | NO   |     | NULL    |       |
+| FINALIA | int(11)     | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> INSERT INTO STUDENT VALUES('4MT19CS001','AARON','MANGALORE',0123456789,'M');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO STUDENT VALUES('4MT19CS002','ABHISHEK','MANIPAL',1234567890,'M');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO STUDENT VALUES('4MT19CS003','AKASH','SHIVMOGHA',2345678901,'M');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO STUDENT VALUES('4MT19CS004','DEERAJ','UDUPI',3456789012,'M');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO STUDENT VALUES('4MT19CS005','ADARSH','MANIPAL',4567890123,'M');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO STUDENT VALUES('4MT19CS006','ADITYA','MANGALORE',5678901234,'F');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO SEMSEC VALUES(1,5,'CS1');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO SEMSEC VALUES(2,5,'CS2');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO SEMSEC VALUES(3,5,'CS3');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO SEMSEC VALUES(4,5,'CS3');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO SEMSEC VALUES(5,5,'CS1');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO SEMSEC VALUES(6,5,'CS2');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO CLASS VALUES('4MT19CS001',1);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO CLASS VALUES('4MT19CS002',2);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO CLASS VALUES('4MT19CS003',3);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO CLASS VALUES('4MT19CS004',4);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO CLASS VALUES('4MT19CS005',5);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO CLASS VALUES('4MT19CS006',1);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO COURSE VALUES('18CS51','ME',5,3);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO COURSE VALUES('18CS52','CN',5,3);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO COURSE VALUES('18CS53','DBMS',5,4);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO COURSE VALUES('18CS54','ATC',5,3);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO COURSE VALUES('18CS55','ADP',5,3);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO COURSE VALUES('18CS56','UP',5,3);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS001','18CS51',1,50,49,48,NULL);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS001','18CS52',1,40,41,42,NULL);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS001','18CS53',1,45,30,35,NULL);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS001','18CS54',1,50,50,47,NULL);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS001','18CS55',1,40,37,48,NULL);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS001','18CS56',1,42,39,40,NULL);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS002','18CS51',2,45,47,49,NULL);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS002','18CS52',2,30,31,32,NULL);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS002','18CS53',2,40,39,38,NULL);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS002','18CS54',2,48,49,50,NULL);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS002','18CS55',2,29,30,31,NULL);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS002','18CS56',2,36,32,43,NULL);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS003','18CS51',3,28,36,21,NULL);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS003','18CS52',3,18,19,20,NULL);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS003','18CS53',3,23,24,25,NULL);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS003','18CS54',3,40,41,42,NULL);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS003','18CS55',3,25,30,27,NULL);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO IAMARKS VALUES('4MT19CS003','18CS56',3,32,33,34,NULL);
+Query OK, 1 row affected (0.02 sec)
+
